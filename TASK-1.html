@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Nmap Scan and Security Analysis Report</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 30px;
+    background-color: #fff;
+    color: #333;
+  }
+  h1, h2, h3 {
+    color: #2c3e50;
+    margin-bottom: 8px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 25px;
+  }
+  th, td {
+    border: 1px solid #bbb;
+    padding: 8px 12px;
+    text-align: left;
+  }
+  th {
+    background-color: #2980b9;
+    color: white;
+  }
+  tr:nth-child(even) {
+    background-color: #f7f9fb;
+  }
+  .risk-high {
+    color: #e74c3c;
+    font-weight: bold;
+  }
+  .risk-medium {
+    color: #f39c12;
+    font-weight: bold;
+  }
+  ul {
+    margin-top: 0;
+  }
+  code {
+    background-color: #eee;
+    padding: 2px 6px;
+    border-radius: 3px;
+  }
+</style>
+</head>
+<body>
+
+<h1>Nmap Scan and Security Analysis Report</h1>
+
+<h2>1. Scan Summary</h2>
+<p><strong>Scan Command:</strong> <code>nmap -sS 192.168.55.0/24</code></p>
+<p>Performed a TCP SYN scan to detect open ports and running services on the local network.</p>
+
+<h2>2. Discovered Hosts and Open Ports</h2>
+
+<h3>Host: 192.168.55.1</h3>
+<table>
+  <thead>
+    <tr><th>Port</th><th>Service</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>23</td><td>Telnet</td><td>Unencrypted remote login service</td></tr>
+    <tr><td>53</td><td>DNS</td><td>Domain Name System service</td></tr>
+    <tr><td>80</td><td>HTTP</td><td>Web server service</td></tr>
+  </tbody>
+</table>
+
+<h3>Host: 192.168.55.104</h3>
+<table>
+  <thead>
+    <tr><th>Port</th><th>Service</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>135</td><td>MS RPC</td><td>Microsoft Remote Procedure Call</td></tr>
+    <tr><td>139</td><td>NetBIOS/SMB</td><td>File sharing over SMB protocol</td></tr>
+    <tr><td>445</td><td>SMB</td><td>Microsoft-DS SMB file sharing</td></tr>
+    <tr><td>902</td><td>VMware Server</td><td>VMware remote management</td></tr>
+    <tr><td>912</td><td>VMware Authd</td><td>VMware authentication service</td></tr>
+    <tr><td>1521</td><td>Oracle DB</td><td>Oracle Database listener port</td></tr>
+    <tr><td>5432</td><td>PostgreSQL</td><td>PostgreSQL database service</td></tr>
+  </tbody>
+</table>
+
+<h2>3. Common Services & Associated Risks</h2>
+<table>
+  <thead>
+    <tr><th>Port</th><th>Service</th><th>Common Usage</th><th>Potential Security Risks</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>23</td><td>Telnet</td><td>Remote command-line login</td><td class="risk-high">Unencrypted traffic, vulnerable to interception and credential theft</td></tr>
+    <tr><td>53</td><td>DNS</td><td>Domain name resolution</td><td class="risk-medium">DNS spoofing or poisoning attacks if not secured</td></tr>
+    <tr><td>80</td><td>HTTP</td><td>Web server traffic</td><td class="risk-medium">Unencrypted web traffic; vulnerable to man-in-the-middle attacks</td></tr>
+    <tr><td>135</td><td>MS RPC</td><td>Windows RPC services</td><td class="risk-medium">Exploits can allow remote code execution</td></tr>
+    <tr><td>139, 445</td><td>NetBIOS/SMB</td><td>File and printer sharing</td><td class="risk-high">Exposed shares can lead to data leaks and ransomware attacks</td></tr>
+    <tr><td>902, 912</td><td>VMware Services</td><td>VMware remote management</td><td class="risk-medium">If exposed, potential unauthorized VM control</td></tr>
+    <tr><td>1521</td><td>Oracle DB</td><td>Database listener</td><td class="risk-high">Target for database attacks and data breaches</td></tr>
+    <tr><td>5432</td><td>PostgreSQL</td><td>Database server</td><td class="risk-medium">Exposed DB can allow unauthorized data access</td></tr>
+  </tbody>
+</table>
+
+<h2>4. Recommendations</h2>
+<ul>
+  <li><strong>Disable or Replace Insecure Services:</strong> Avoid Telnet; use SSH for encrypted access.</li>
+  <li><strong>Restrict Network Access:</strong> Limit SMB, database, and VMware ports to trusted hosts only via firewall rules.</li>
+  <li><strong>Patch & Update:</strong> Keep all services and OS patched against known vulnerabilities.</li>
+  <li><strong>Use Encryption:</strong> Implement HTTPS instead of HTTP and encrypt DNS traffic if possible.</li>
+  <li><strong>Perform Regular Vulnerability Scans:</strong> Use tools like Nessus, OpenVAS to detect weak spots.</li>
+  <li><strong>Audit & Monitor:</strong> Continuously monitor logs for unusual access or traffic patterns.</li>
+</ul>
+
+<p><em>Report generated based on Nmap scan results and common security best practices.</em></p>
+
+</body>
+</html>
