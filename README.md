@@ -1,36 +1,62 @@
-# Nmap Network Exposure Analysis
+# 🔍 Nmap Network Exposure Analysis – Cybersecurity Internship Task 1
 
-This repository contains the results and analysis of a network scan performed using Nmap on a local IP range. The scan identified active devices and their open TCP ports using a SYN scan. The report lists common services running on these ports and highlights potential security risks, such as exposed vulnerable services that could be exploited.
+## ✅ Objective
 
-## Table of Contents
-- [Introduction](#introduction)
-- [Scan Results](#scan-results)
-- [Analysis and Findings](#analysis-and-findings)
-- [Security Implications](#security-implications)
-- [Conclusion](#conclusion)
+Perform a local network scan using **Nmap**, identify active devices, detect open TCP ports, and analyze potential security risks based on exposed services.
 
-## Introduction
-This project aims to provide insights into the network devices on your local network and the security implications of open ports and services running on those devices. The Nmap tool was used to conduct a SYN scan to identify active IP addresses and open ports, which was then analyzed to determine the potential security risks associated with those ports.
+---
 
-## Scan Results
-- **IP Range Scanned**: 192.168.1.0/24
-- **Scan Method**: SYN Scan (`-sS`)
+## 🛠️ Tools & Configuration
 
-The scan results are summarized and the open ports, services, and associated risks have been documented.
+- **Tool Used:** Nmap
+- **Scan Type:** SYN Scan (`-sS`)
+- **IP Range Scanned:** `192.168.1.0/24`
 
-## Analysis and Findings
-This section includes the list of open ports, the services running on those ports, and the associated vulnerabilities.
+---
 
-- Port 22: SSH - This is a common target for brute-force attacks.
-- Port 80: HTTP - Exposed web servers may have vulnerabilities if not patched.
-- Port 443: HTTPS - Ensure certificates are properly configured.
-- Port 3306: MySQL - Exposing database services is a significant security risk.
+## 📊 Scan Results
 
-## Security Implications
-Open ports can be exploited if not properly secured. It is essential to ensure that only necessary ports are open and that services are updated regularly to mitigate security risks.
+The following open ports were discovered across the scanned IP range:
 
-## Conclusion
-Regular network scanning with tools like Nmap is crucial for identifying potential security risks. This repository provides an analysis of the current network exposure and suggests remediation steps for securing the identified services.
+| Port | Service | Risk Description |
+|------|---------|------------------|
+| **22** | SSH     | Common target for brute-force attacks |
+| **80** | HTTP    | Might expose outdated/unpatched web applications |
+| **443** | HTTPS  | Ensure SSL certificates are valid and properly configured |
+| **3306** | MySQL | Direct exposure of databases poses a high risk |
 
-## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+---
+
+## 🔍 Analysis & Findings
+
+- Open ports allow external communication with services running on your network devices.
+- Services like SSH and MySQL, if exposed and unprotected, increase the **attack surface**.
+- Weak or default configurations can be easily exploited using automated tools.
+
+---
+
+## 🔐 Security Implications
+
+- **SSH (Port 22):** Should be limited to specific IPs or disabled if unused.
+- **HTTP (Port 80):** Ensure web servers are patched and monitored.
+- **MySQL (Port 3306):** Never expose database services directly to the internet.
+- **General Advice:** Regularly audit open ports and remove unnecessary services.
+
+---
+
+## 📌 Conclusion
+
+Using **Nmap** for network scanning helps detect services and exposures early. This task helped identify key weaknesses and understand how attackers could exploit improperly secured services. Mitigating these exposures is crucial for maintaining a secure environment.
+
+---
+
+## 📁 Files Included
+
+- `README.md` – Full report and analysis  
+- `Nmap_Report_Task_1.html` – HTML version of the scan report (optional rename suggestion from `TASK-1.html`)
+
+---
+
+## 🧾 License
+
+This project is licensed under the MIT License – see the [LICENSE](LICENSE) file for details.
